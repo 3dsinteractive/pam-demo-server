@@ -39,6 +39,9 @@ var req *gorequest.SuperAgent
 func main() {
 	initVariables()
 	registerServices()
+
+	// Start services
+	e.Start(":8080")
 }
 
 func initVariables() {
