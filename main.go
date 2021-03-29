@@ -263,7 +263,7 @@ func getDefaultUsers() []*user {
 }
 
 func readDatabaseFromEnv() string {
-	db := os.Getenv("database")
+	db := os.Getenv("CUSTOMER_DATABASE")
 	if len(db) == 0 {
 		db = "boodabest-login"
 	}
