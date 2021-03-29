@@ -215,7 +215,9 @@ func postRegisterEventToPAMTracker(
 	url := fmt.Sprint(endpoint, "/trackers/events")
 	req := getRequester()
 	req = req.Post(url)
-	req.Header.Add("Authentication", authToken)
+
+	req.Header.Set("Authentication", authToken)
+	logMessage(fmt.Sprintf("Authentication=%s", authToken))
 
 	// Log post body
 	postBodyJS, err := json.Marshal(postBody)
