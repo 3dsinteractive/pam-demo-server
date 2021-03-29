@@ -51,8 +51,14 @@ func initVariables() {
 }
 
 func registerServices() error {
+	e.GET("/", handleDefault)
 	e.POST("/login", handleLogin)
 	e.POST("/register", handleRegister)
+	return nil
+}
+
+func handleDefault(ctx echo.Context) error {
+	responseSuccess(ctx, map[string]string{"status": "ok"})
 	return nil
 }
 
