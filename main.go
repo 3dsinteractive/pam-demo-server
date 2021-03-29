@@ -76,7 +76,10 @@ func handleRegister(ctx echo.Context) error {
 	database := readDatabaseFromEnv()
 	hashedCustID := hashCustomerID(user.UserID)
 
-	_, body, err := postRegisterEventToPAMTracker(endpoint, authToken, database, hashedCustID, registerBody.ConsentIDs, user.Email, registerBody.Mobile)
+	_, body, err := postRegisterEventToPAMTracker(
+		endpoint, authToken, database, hashedCustID,
+		registerBody.ConsentIDs, user.Email, registerBody.Mobile)
+
 	logMessage(body)
 
 	res := map[string]string{}
