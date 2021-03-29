@@ -16,5 +16,6 @@ else
     go mod vendor
 fi
 
+# TIMESTAMP=$(date +"%Y%m%d%H%M%S")
 docker build -f Dockerfile -t 3dsinteractive/pam-demo-server:$TIMESTAMP .
 docker push 3dsinteractive/pam-demo-server:$TIMESTAMP

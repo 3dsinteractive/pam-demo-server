@@ -10,6 +10,7 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/parnurzeal/gorequest"
+	"github.com/segmentio/fasthash/fnv1a"
 )
 
 type user struct {
@@ -51,6 +52,15 @@ func initVariables() {
 }
 
 func registerServices() error {
+
+	// e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+	// 	Skipper:          middleware.DefaultSkipper,
+	// 	AllowOrigins:     []string{"*"},
+	// 	AllowHeaders:     []string{},
+	// 	AllowMethods:     []string{echo.GET, echo.PUT, echo.POST, echo.DELETE, echo.HEAD, echo.OPTIONS, echo.PATCH},
+	// 	AllowCredentials: true,
+	// }))
+
 	e.GET("/", handleDefault)
 	e.POST("/login", handleLogin)
 	e.POST("/register", handleRegister)
@@ -98,7 +108,8 @@ func handleRegister(ctx echo.Context) error {
 }
 
 func hashCustomerID(customerID string) string {
-	return customerID
+	hashed := fnv1a.HashString64(customerID)
+	return fmt.Sprintf("%d", hashed)
 }
 
 func handleLogin(ctx echo.Context) error {
