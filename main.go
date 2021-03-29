@@ -197,12 +197,12 @@ func postRegisterEventToPAMTracker(
 	mobile string) (*http.Response, string, error) {
 
 	postBody := map[string]interface{}{
-		"event": "register_success",
+		"event": "register",
 		"form_fields": map[string]string{
-			"_database":   database,
-			"_consent_id": consentAllowID,
-			"customer":    customerID,
-			"email":       email,
+			"_database":    database,
+			"_consent_ids": consentAllowID,
+			"customer":     customerID,
+			"email":        email,
 		},
 	}
 
