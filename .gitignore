@@ -54,3 +54,5 @@ mail.log
 *.backup
 .env_dev
 *.swp
+
+pam-demo-server

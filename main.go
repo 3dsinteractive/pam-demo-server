@@ -111,7 +111,6 @@ func handleLogin(ctx echo.Context) error {
 	}
 
 	hashedCustID := hashCustomerID(user.UserID)
-
 	res := map[string]string{
 		"customer_id": hashedCustID,
 	}
@@ -135,11 +134,29 @@ func logMessage(message string) {
 }
 
 func responseError(ctx echo.Context, message string) {
-
+	res := map[string]interface{}{
+		"error": message,
+	}
+	responseJSON(ctx, res)
 }
 
-func responseSuccess(ctx echo.Context, obj interface{}) {
+func responseSuccess(ctx echo.Context, response interface{}) {
+	res := map[string]interface{}{
+		"data": response,
+	}
+	responseJSON(ctx, res)
+}
 
+func responseJSON(ctx echo.Context, response interface{}) error {
+	str, err := json.Marshal(response)
+	if err != nil {
+		return err
+	}
+	writer := ctx.Response().Writer
+	writer.Header().Set("Content-Type", "application/json")
+	writer.Write(str)
+
+	return nil
 }
 
 func findUser(email string) *user {
