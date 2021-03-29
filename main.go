@@ -25,7 +25,7 @@ type registerPostBody struct {
 	Email      string `json:"email"`
 	Mobile     string `json:"mobile"`
 	Password   string `json:"password"`
-	ConsentIDs string `json:"consent_ids"` // comma separated valud of consent allow ids
+	ConsentIDs string `json:"consent_ids"` // comma separated value of consent allow ids
 }
 
 type loginPostBody struct {
@@ -101,7 +101,10 @@ func handleRegister(ctx echo.Context) error {
 
 	logMessage(body)
 
-	res := map[string]string{}
+	res := map[string]string{
+		"customer_id": hashedCustID,
+		"email":       user.Email,
+	}
 	responseSuccess(ctx, res)
 
 	return nil
