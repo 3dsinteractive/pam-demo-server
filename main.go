@@ -219,6 +219,7 @@ func postRegisterEventToPAMTracker(
 	req := getRequester()
 	req = req.Post(url)
 
+	req.Cookies = []*http.Cookie{}
 	req.Header.Set("Authorization", authToken)
 	logMessage(fmt.Sprintf("Authorization=%s", authToken))
 
