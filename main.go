@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"github.com/parnurzeal/gorequest"
 	"github.com/segmentio/fasthash/fnv1a"
 )
@@ -60,6 +61,8 @@ func registerServices() error {
 	// 	AllowMethods:     []string{echo.GET, echo.PUT, echo.POST, echo.DELETE, echo.HEAD, echo.OPTIONS, echo.PATCH},
 	// 	AllowCredentials: true,
 	// }))
+
+	e.Use(middleware.CORS())
 
 	e.GET("/", handleDefault)
 	e.POST("/login", handleLogin)
