@@ -274,29 +274,18 @@ func readUsersFromEnv() map[string]*user {
 }
 
 func getDefaultUsers() []*user {
-	return []*user{
-		{
-			UserID:   "a",
-			Email:    "a@a.com",
-			Password: "a",
-			Mobile:   "0899999991",
+	userNames := []string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
+	users := []*user{}
+	for i, userName := range userNames {
+		users = append(users, &user{
+			UserID:   userName,
+			Email:    fmt.Sprintf("%s@%s.com", userName, userName),
+			Password: userName,
+			Mobile:   fmt.Sprintf("08999999%02d", i),
 			Database: readDatabaseFromEnv(),
-		},
-		{
-			UserID:   "b",
-			Email:    "b@b.com",
-			Password: "b",
-			Mobile:   "0899999992",
-			Database: readDatabaseFromEnv(),
-		},
-		{
-			UserID:   "c",
-			Email:    "c@c.com",
-			Password: "c",
-			Mobile:   "0899999993",
-			Database: readDatabaseFromEnv(),
-		},
+		})
 	}
+	return users
 }
 
 func readDatabaseFromEnv() string {
