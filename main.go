@@ -224,6 +224,7 @@ func postRegisterEventToPAMTracker(
 
 	req.Cookies = []*http.Cookie{}
 	req.Header.Set("Authorization", authToken)
+	req.Header.Set("x-allow-contact-id-cookie", "false")
 	logMessage(fmt.Sprintf("Authorization=%s", authToken))
 
 	// Log post body
